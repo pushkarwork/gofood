@@ -24,11 +24,13 @@ const Login = () => {
             body: JSON.stringify({ email: formvalue.email, password: formvalue.password })
         });
         const json = await response.json()
-        console.log(json)
+        // console.log(json)
         if (!json.success) {
             console.log("cant be submitted")
         }
         if (json.success) {
+            console.log(json.authToken)
+            localStorage.setItem("authToken", json.authToken)
             navigate("/")
         }
 

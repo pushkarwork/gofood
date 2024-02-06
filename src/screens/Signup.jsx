@@ -28,7 +28,7 @@ const Signup = () => {
             console.log("cant be submitted")
         }
         if (json.success) {
-            navigate("/loginUser")
+            navigate("/login")
         }
 
 
