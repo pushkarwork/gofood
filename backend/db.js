@@ -1,10 +1,14 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
 const mongoconnect = async () => {
-
-    await mongoose.connect("mongodb://localhost:27017").then(() => console.log("connected to db")).catch((err) => console.log(err))
-
-}
-
+    try {
+        await mongoose.connect("mongodb://localhost:27017/goFood");
+        const fetched_data = mongoose.connection.db.collection("food_items");
+        const data = await fetched_data.find({}).toArray();
+        console.log("Fetched data:", data);
+    } catch (error) {
+        console.error("Error connecting to the database:", error);
+    }
+};
 
 module.exports = mongoconnect;
