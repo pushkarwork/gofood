@@ -2,7 +2,8 @@ import React from 'react'
 import Home from './screens/Home'
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import Login from './screens/Login';
-const router = createBrowserRouter([{ path: "/", element: <Home></Home> }, { path: "/login", element: <Login></Login> }]);
+import Signup from './screens/Signup';
+const router = createBrowserRouter([{ path: "/", element: <Home></Home> }, { path: "/login", element: <Login></Login> }, { path: "/signup", element: <Signup></Signup> }]);
 const App = () => {
   return (
     <div>
