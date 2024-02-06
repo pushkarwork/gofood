@@ -25,4 +25,26 @@ router.post("/createuser", body("email").isEmail(), body("password").isLength({ 
     }
 })
 
+router.post("/loginUser", async (req, res) => {
+    const email = req.body.email;
+
+    try {
+        const user = await userModel.findOne({ email })
+        if (!user) {
+            return res.json({ error: "incorrect email" })
+        }
+        if (req.body.password !== user.password) {
+            return res.json({ error: "incorrect password" })
+        }
+
+        return res.json({ success: true })
+        // console.log(user.location)
+
+
+    } catch (error) {
+
+    }
+
+})
+
 module.exports = router

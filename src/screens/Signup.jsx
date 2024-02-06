@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [formvalue, setFormValue] = useState({ name: "", email: "", password: "", location: "" })
     const handleOnChange = (e) => {
         setFormValue({ ...formvalue, [e.target.name]: e.target.value })
@@ -25,6 +26,9 @@ const Signup = () => {
         console.log(json)
         if (!json.success) {
             console.log("cant be submitted")
+        }
+        if (json.success) {
+            navigate("/loginUser")
         }
 
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
-    const [formvalue, setFormValue] = useState({  email: "", password: "" })
+    const navigate = useNavigate();
+    const [formvalue, setFormValue] = useState({ email: "", password: "" })
     const handleOnChange = (e) => {
         setFormValue({ ...formvalue, [e.target.name]: e.target.value })
 
@@ -14,18 +15,21 @@ const Login = () => {
         e.preventDefault();
         console.log(formvalue)
         // setFormValue({ name: "", email: "", password: "", location: "" })
-        
+
         const response = await fetch('http://localhost:3000/api/loginUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({  email: formvalue.email, password: formvalue.password })
+            body: JSON.stringify({ email: formvalue.email, password: formvalue.password })
         });
         const json = await response.json()
         console.log(json)
         if (!json.success) {
             console.log("cant be submitted")
+        }
+        if (json.success) {
+            navigate("/")
         }
 
 
@@ -34,8 +38,8 @@ const Login = () => {
         <div>
             <Navbar></Navbar>
             <form className='container mt-5' onSubmit={handleSubmit}>
-                
-               
+
+
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input name='email' value={formvalue.email} onChange={handleOnChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" />
