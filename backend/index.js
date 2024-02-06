@@ -11,6 +11,7 @@ app.use(cors());
 
 // app.use(expressValidator)
 app.use("/api", require("./Routes/userRoute"))
+app.use("/api", require("./Routes/foodRoutes"))
 app.get('/', function (req, res) {
     res.send('Hello World')
 })
